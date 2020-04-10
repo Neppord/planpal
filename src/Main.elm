@@ -100,6 +100,25 @@ houses =
                     ]
                 <|
                     text title
+
+        numberToTile n =
+            if n > 0 then
+                house
+
+            else
+                empty
+
+        houseMatrix =
+            toMatrix housingModel
+
+        renderColumn c =
+            column
+                [ centerX
+                , centerY
+                , spacing 10
+                ]
+            <|
+                List.map numberToTile c
     in
     row
         [ centerX
@@ -108,26 +127,7 @@ houses =
         , spacing 10
         ]
     <|
-        List.map
-            (\c ->
-                column
-                    [ centerX
-                    , centerY
-                    , spacing 10
-                    ]
-                <|
-                    List.map
-                        (\n ->
-                            if n > 0 then
-                                house
-
-                            else
-                                empty
-                        )
-                        c
-            )
-        <|
-            toMatrix housingModel
+        List.map renderColumn houseMatrix
 
 
 main =
