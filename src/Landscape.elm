@@ -7,7 +7,7 @@ import Element.Border as Border
 import Model exposing (housingModel, toMatrix)
 
 
-landscape =
+landscape _ =
     el
         [ width fill
         , height fill

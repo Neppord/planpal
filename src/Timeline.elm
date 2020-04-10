@@ -29,7 +29,7 @@ expense =
         text "Expense"
 
 
-timeline =
+timeline _ =
     column
         [ width <| px 150
         , padding 15
