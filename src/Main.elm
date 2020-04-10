@@ -72,7 +72,26 @@ landscape =
         , Background.color dirtBrown
         ]
     <|
-        none
+        houses
+
+
+houses =
+    let
+        greenBackground =
+            Background.color green
+
+        house =
+            el
+                [ greenBackground
+                , padding 15
+                , Border.rounded 5
+                ]
+            <|
+                text "House"
+    in
+    row [ centerX, centerY ]
+        [ house
+        ]
 
 
 main =
