@@ -9,8 +9,8 @@ type alias Timestamped value =
     }
 
 
-type alias Event =
-    Timestamped Model -> Model
+type Event
+    = Event (Timestamped Model -> Model)
 
 
 type alias Timeline =
