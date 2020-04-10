@@ -2,9 +2,9 @@ module Main exposing (..)
 
 import Element exposing (..)
 import Html exposing (Html)
-import Landscape exposing (landscape)
 import Model
-import Timeline exposing (timeline)
+import View.Landscape exposing (landscape)
+import View.Timeline exposing (timeline)
 
 
 main =

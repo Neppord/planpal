@@ -1,4 +1,4 @@
-module Timeline exposing (..)
+module View.Timeline exposing (..)
 
 import Colors exposing (..)
 import Element exposing (..)

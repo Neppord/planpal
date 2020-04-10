@@ -1,4 +1,4 @@
-module Landscape exposing (..)
+module View.Landscape exposing (..)
 
 import Colors exposing (..)
 import Element exposing (..)
