@@ -73,10 +73,10 @@ landscape =
         , Background.color dirtBrown
         ]
     <|
-        houses
+        tiles
 
 
-houses =
+tiles =
     let
         house =
             tile green "House"
