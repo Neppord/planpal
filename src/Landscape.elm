@@ -14,10 +14,10 @@ landscape _ =
         , Background.color dirtBrown
         ]
     <|
-        tiles
+        viewTiles
 
 
-tiles =
+viewTiles =
     let
         house =
             tile green "House"
