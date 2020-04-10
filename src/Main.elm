@@ -9,6 +9,7 @@ eventAttr color =
     [ padding 10
     , Border.rounded 5
     , Background.color color
+    , mouseOver <| [ scale 1.2 ]
     ]
 
 
