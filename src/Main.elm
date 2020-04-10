@@ -77,20 +77,46 @@ landscape =
 
 houses =
     let
-        greenBackground =
-            Background.color green
-
         house =
+            tile green "House"
+
+        empty =
+            tile timelineColor "Empty"
+
+        tile color title =
             el
-                [ greenBackground
+                [ Background.color color
                 , padding 15
+                , height <| px 75
+                , width <| px 75
+                , clip
                 , Border.rounded 5
                 ]
             <|
-                text "House"
+                el
+                    [ centerX
+                    , centerY
+                    ]
+                <|
+                    text title
     in
-    row [ centerX, centerY ]
-        [ house
+    column
+        [ centerX, centerY, padding 10, spacing 10 ]
+        [ row [ centerX, centerY, spacing 10 ]
+            [ house
+            , empty
+            , empty
+            ]
+        , row [ centerX, centerY, spacing 10 ]
+            [ house
+            , empty
+            , house
+            ]
+        , row [ centerX, centerY, spacing 10 ]
+            [ empty
+            , house
+            , empty
+            ]
         ]
 
 
