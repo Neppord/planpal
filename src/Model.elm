@@ -18,12 +18,12 @@ type alias Timeline =
 
 
 type alias Model =
-    { landscape : SmallMap Int
+    { landscape : SmallLandscape Int
     , timeline : Timeline
     }
 
 
-type alias SmallMap a =
+type alias SmallLandscape a =
     { p00 : a
     , p10 : a
     , p20 : a
@@ -36,7 +36,7 @@ type alias SmallMap a =
     }
 
 
-housingModel : SmallMap Int
+housingModel : SmallLandscape Int
 housingModel =
     { p00 = 0
     , p10 = 1
