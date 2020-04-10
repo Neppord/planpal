@@ -24,6 +24,10 @@ timelineColor =
     rgb 0.9 0.9 0.92
 
 
+dirtBrown =
+    rgb 0.6 0.5 0.3
+
+
 income =
     el
         (eventAttr green)
@@ -59,7 +63,17 @@ timeline =
         ]
 
 
+landscape =
+    el
+        [ width fill
+        , height fill
+        , Background.color dirtBrown
+        ]
+    <|
+        none
+
+
 main =
     layout [ height fill ] <|
-        row [ height fill ]
-            [ timeline ]
+        row [ height fill, width fill ]
+            [ timeline, landscape ]
