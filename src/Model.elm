@@ -1,5 +1,23 @@
 module Model exposing (..)
 
+import Heap exposing (Heap, by, smallest)
+
+
+type alias Timestamped value =
+    { timestamp : Int
+    , value : value
+    }
+
+
+type Event
+    = Event
+
+
+type alias Model =
+    { landscape : SmallMap Int
+    , timeline : Heap (Timestamped Event)
+    }
+
 
 type alias SmallMap a =
     { p00 : a
@@ -33,3 +51,10 @@ toMatrix m =
     , [ m.p10, m.p11, m.p12 ]
     , [ m.p20, m.p21, m.p22 ]
     ]
+
+
+init : Model
+init =
+    { landscape = housingModel
+    , timeline = Heap.empty (smallest |> by .timestamp)
+    }
