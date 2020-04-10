@@ -10,6 +10,7 @@ eventAttr color =
     , Border.rounded 5
     , Background.color color
     , mouseOver <| [ scale 1.2 ]
+    , pointer
     ]
 
 
