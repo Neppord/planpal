@@ -6,3 +6,5 @@ elm-stuff
 repl-temp-*
 # parcel cache directory
 /.cache/
+# parcel development directory
+/dist/
