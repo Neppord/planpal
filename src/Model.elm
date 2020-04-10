@@ -9,13 +9,17 @@ type alias Timestamped value =
     }
 
 
-type Event
-    = Event
+type alias Event =
+    Timestamped Model -> Model
+
+
+type alias Timeline =
+    Heap (Timestamped Event)
 
 
 type alias Model =
     { landscape : SmallMap Int
-    , timeline : Heap (Timestamped Event)
+    , timeline : Timeline
     }
 
 
