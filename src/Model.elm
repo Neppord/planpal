@@ -18,9 +18,13 @@ type alias Timeline =
 
 
 type alias Model =
-    { landscape : SmallLandscape Int
+    { landscape : Landscape
     , timeline : Timeline
     }
+
+
+type alias Landscape =
+    SmallLandscape Int
 
 
 type alias SmallLandscape a =
@@ -50,6 +54,7 @@ housingModel =
     }
 
 
+toMatrix : Landscape -> List (List Int)
 toMatrix m =
     [ [ m.p00, m.p01, m.p02 ]
     , [ m.p10, m.p11, m.p12 ]

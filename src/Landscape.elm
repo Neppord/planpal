@@ -4,20 +4,21 @@ import Colors exposing (..)
 import Element exposing (..)
 import Element.Background as Background
 import Element.Border as Border
-import Model exposing (housingModel, toMatrix)
+import Model exposing (Landscape, toMatrix)
 
 
-landscape _ =
+landscape : Landscape -> Element msg
+landscape l =
     el
         [ width fill
         , height fill
         , Background.color dirtBrown
         ]
     <|
-        viewTiles
+        (viewTiles <| toMatrix l)
 
 
-viewTiles =
+viewTiles tiles =
     let
         house =
             tile green "House"
@@ -49,9 +50,6 @@ viewTiles =
             else
                 empty
 
-        houseMatrix =
-            toMatrix housingModel
-
         renderColumn c =
             column
                 [ centerX
@@ -68,4 +66,4 @@ viewTiles =
         , spacing 10
         ]
     <|
-        List.map renderColumn houseMatrix
+        List.map renderColumn tiles
