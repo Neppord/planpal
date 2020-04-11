@@ -50,9 +50,8 @@ timeline current states =
                     expense
             )
         |> column
-            [ width <| px 150
-            , padding 15
+            [ width fill
             , spacing 10
             , height fill
-            , Background.color <| timelineColor
+            , Background.color <| grey
             ]

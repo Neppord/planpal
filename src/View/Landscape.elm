@@ -24,7 +24,7 @@ viewTiles tiles =
             tile green "House"
 
         empty =
-            tile timelineColor "Empty"
+            tile grey "Empty"
 
         tile color title =
             el

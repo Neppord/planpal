@@ -34,4 +34,4 @@ init =
         , stats = 0
         }
         |> queue (every 100 (addToMoney 500) |> at 0)
-        |> queue (every 500 (addToMoney -300) |> at 0)
+        |> queue (every 300 (addToMoney -300) |> at 300)

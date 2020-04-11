@@ -11,7 +11,7 @@ green =
     rgb 0.5 0.9 0.5
 
 
-timelineColor =
+grey =
     rgb 0.9 0.9 0.92
 
 
