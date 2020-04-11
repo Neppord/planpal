@@ -1,6 +1,7 @@
 module Main exposing (..)
 
-import Colors exposing (green, grey)
+import Browser
+import Colors exposing (grey)
 import Data.Timeline exposing (predict, unwrap)
 import Element exposing (..)
 import Element.Background as Background
@@ -13,7 +14,15 @@ import View.Timeline exposing (timeline)
 
 
 main =
-    view init
+    Browser.sandbox
+        { init = init
+        , view = view
+        , update = update
+        }
+
+
+update _ model =
+    model
 
 
 view : Model -> Html msg
