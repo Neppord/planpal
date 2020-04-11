@@ -29,22 +29,30 @@ expense =
         text "Expense"
 
 
-timeline _ =
-    column
-        [ width <| px 150
-        , padding 15
-        , spacing 10
-        , height fill
-        , Background.color <| timelineColor
-        ]
-        [ income
-        , income
-        , income
-        , income
-        , income
-        , expense
-        , income
-        , income
-        , income
-        , expense
-        ]
+timeline current states =
+    let
+        futureStats =
+            List.map .stats states
+
+        stats =
+            current.stats :: futureStats
+
+        diffs =
+            List.map2 (-) futureStats stats
+    in
+    diffs
+        |> List.map
+            (\n ->
+                if n >= 0 then
+                    income
+
+                else
+                    expense
+            )
+        |> column
+            [ width <| px 150
+            , padding 15
+            , spacing 10
+            , height fill
+            , Background.color <| timelineColor
+            ]

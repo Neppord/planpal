@@ -17,6 +17,26 @@ load (Timestamped time (Action action)) =
     action time
 
 
+at : time -> Action time data -> Event time data
+at time action =
+    Timestamped time action
+
+
+every : number -> (data -> data) -> Action number data
+every time f =
+    let
+        action now model =
+            ( f model
+            , empty
+                |> queue
+                    (every time f
+                        |> at (now + time)
+                    )
+            )
+    in
+    Action action
+
+
 
 -- Events
 
@@ -28,6 +48,11 @@ type alias Events time data =
 empty : Events comparable data
 empty =
     Heap.empty (Heap.smallest |> Heap.by timestamp)
+
+
+queue : Event time data -> Events time data -> Events time data
+queue event events =
+    events |> Heap.push event
 
 
 pop : Events time data -> Maybe ( Event time data, Events time data )

@@ -14,6 +14,10 @@ main =
 
 view : Model -> Html msg
 view model =
+    let
+        innerModel =
+            unwrap model
+    in
     layout [ height fill ] <|
         row [ height fill, width fill ]
-            [ timeline <| predict 10 model, landscape <| unwrap model ]
+            [ timeline innerModel <| predict 10 model, landscape <| innerModel.landscape ]

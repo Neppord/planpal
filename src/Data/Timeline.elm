@@ -1,6 +1,6 @@
 module Data.Timeline exposing (..)
 
-import Data.Event as Event exposing (Events)
+import Data.Event as Event exposing (Event, Events)
 
 
 type Timeline time data
@@ -13,6 +13,11 @@ wrap data =
 
 unwrap (Timeline _ data) =
     data
+
+
+queue : Event time data -> Timeline time data -> Timeline time data
+queue event (Timeline events data) =
+    Timeline (events |> Event.queue event) data
 
 
 map f (Timeline events data) =
