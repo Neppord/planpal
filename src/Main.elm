@@ -2,7 +2,8 @@ module Main exposing (..)
 
 import Browser
 import Colors exposing (grey)
-import Data.Timeline exposing (predict, unwrap)
+import Data.Msg exposing (Msg(..))
+import Data.Timeline as Timeline exposing (predict, unwrap)
 import Element exposing (..)
 import Element.Background as Background
 import Element.Border as Border
@@ -21,11 +22,16 @@ main =
         }
 
 
-update _ model =
-    model
+update msg model =
+    case msg of
+        Next n ->
+            (List.repeat (n + 1) Timeline.next
+                |> List.foldl (>>) identity
+            )
+                model
 
 
-view : Model -> Html msg
+view : Model -> Html Msg
 view model =
     layout [ height fill ] <|
         row [ height fill, width fill ]

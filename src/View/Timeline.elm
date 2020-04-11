@@ -1,9 +1,11 @@
 module View.Timeline exposing (..)
 
 import Colors exposing (..)
+import Data.Msg exposing (Msg(..))
 import Element exposing (..)
 import Element.Background as Background
 import Element.Border as Border
+import Element.Events exposing (onClick)
 
 
 eventAttr color =
@@ -41,13 +43,17 @@ timeline current states =
             List.map2 (-) futureStats stats
     in
     diffs
-        |> List.map
-            (\n ->
+        |> List.indexedMap
+            (\i n ->
+                let
+                    clickWrapper =
+                        el [ Next i |> onClick ]
+                in
                 if n >= 0 then
-                    income
+                    income |> clickWrapper
 
                 else
-                    expense
+                    expense |> clickWrapper
             )
         |> column
             [ width fill

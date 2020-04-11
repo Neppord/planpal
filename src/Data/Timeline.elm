@@ -24,6 +24,16 @@ map f (Timeline events data) =
     Timeline events <| f data
 
 
+next : Timeline time data -> Timeline time data
+next (Timeline events data) =
+    case Event.next data events of
+        Just ( nextData, nextEvents ) ->
+            Timeline nextEvents nextData
+
+        Nothing ->
+            Timeline events data
+
+
 predict : Int -> Timeline time data -> List data
 predict n (Timeline events data) =
     Event.predict n data events
