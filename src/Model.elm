@@ -1,6 +1,7 @@
 module Model exposing (..)
 
 import Heap exposing (Heap, by, smallest)
+import Maybe as Maybe
 
 
 type alias Timestamped value =
@@ -15,6 +16,43 @@ type Event
 
 type alias Timeline =
     Heap (Timestamped Event)
+
+
+pop : Model -> Maybe ( Event, Timestamped Model )
+pop model =
+    let
+        repack ( timestampedEvent, timeline ) =
+            ( timestampedEvent.value
+            , { timestamp = timestampedEvent.timestamp
+              , value = { model | timeline = timeline }
+              }
+            )
+    in
+    Maybe.map repack <| Heap.pop model.timeline
+
+
+apply : Event -> Timestamped Model -> Model
+apply (Event f) timestampedModel =
+    f timestampedModel
+
+
+next : Model -> Maybe Model
+next model =
+    Maybe.map (\( a, b ) -> apply a b) (pop model)
+
+
+predict : Int -> Model -> List Model
+predict n model =
+    if n <= 0 then
+        []
+
+    else
+        case next model of
+            Just a ->
+                a :: predict (n - 1) a
+
+            Nothing ->
+                []
 
 
 type alias Model =
