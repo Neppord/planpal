@@ -5,6 +5,7 @@
   "scripts": {
     "start": "parcel src/index.html --open",
     "build": "rm -r docs/ && parcel build src/index.html --out-dir docs --public-url /planpal/",
+    "format": "elm-format --yes src/",
     "elm": "elm"
   },
   "repository": {

@@ -1,18 +1,19 @@
 module Main exposing (..)
 
+import Data.Timeline exposing (predict, unwrap)
 import Element exposing (..)
 import Html exposing (Html)
-import Model
+import Model exposing (Model, init)
 import View.Landscape exposing (landscape)
 import View.Timeline exposing (timeline)
 
 
 main =
-    view Model.init
+    view init
 
 
-view : Model.Model -> Html msg
+view : Model -> Html msg
 view model =
     layout [ height fill ] <|
         row [ height fill, width fill ]
-            [ timeline model.timeline, landscape model.landscape ]
+            [ timeline <| predict 10 model, landscape <| unwrap model ]

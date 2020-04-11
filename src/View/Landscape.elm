@@ -1,10 +1,10 @@
 module View.Landscape exposing (..)
 
 import Colors exposing (..)
+import Data.Landscape exposing (Landscape, toMatrix)
 import Element exposing (..)
 import Element.Background as Background
 import Element.Border as Border
-import Model exposing (Landscape, toMatrix)
 
 
 landscape : Landscape -> Element msg
