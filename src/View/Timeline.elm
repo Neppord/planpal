@@ -6,6 +6,7 @@ import Element exposing (..)
 import Element.Background as Background
 import Element.Border as Border
 import Element.Events exposing (onClick)
+import Html.Attributes
 
 
 eventAttr color =
@@ -14,6 +15,8 @@ eventAttr color =
     , Background.color color
     , mouseOver <| [ scale 1.2 ]
     , pointer
+    , Html.Attributes.style "user-select" "none"
+        |> htmlAttribute
     ]
 
 
