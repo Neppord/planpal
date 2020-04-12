@@ -56,6 +56,7 @@ leftPanel model =
             , Background.color <| grey
             , padding 15
             , spacing 10
+            , scrollbarY
             ]
 
 
