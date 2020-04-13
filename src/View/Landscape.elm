@@ -37,16 +37,15 @@ tile color title =
 
 
 renderColumn c =
-    c
-        |> List.map
-            (\n ->
-                case n of
-                    Just _ ->
-                        tile green "House"
+    let
+        house =
+            tile green "House"
 
-                    Nothing ->
-                        tile grey "Empty"
-            )
+        empty =
+            tile grey "Empty"
+    in
+    c
+        |> List.map ((Maybe.map <| always house) >> Maybe.withDefault empty)
         |> column
             [ centerX
             , centerY
