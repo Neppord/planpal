@@ -18,53 +18,48 @@ landscape l =
         viewTiles l
 
 
-viewTiles tiles =
-    let
-        house =
-            tile green "House"
-
-        empty =
-            tile grey "Empty"
-
-        tile color title =
-            el
-                [ Background.color color
-                , padding 15
-                , height <| px 75
-                , width <| px 75
-                , clip
-                , Border.rounded 5
-                ]
-            <|
-                el
-                    [ centerX
-                    , centerY
-                    ]
-                <|
-                    text title
-
-        numberToTile n =
-            case n of
-                Just _ ->
-                    house
-
-                Nothing ->
-                    empty
-
-        renderColumn c =
-            column
-                [ centerX
-                , centerY
-                , spacing 10
-                ]
-            <|
-                List.map numberToTile c
-    in
-    row
-        [ centerX
-        , centerY
-        , padding 10
-        , spacing 10
+tile color title =
+    el
+        [ Background.color color
+        , padding 15
+        , height <| px 75
+        , width <| px 75
+        , clip
+        , Border.rounded 5
         ]
     <|
-        List.map renderColumn tiles
+        el
+            [ centerX
+            , centerY
+            ]
+        <|
+            text title
+
+
+renderColumn c =
+    c
+        |> List.map
+            (\n ->
+                case n of
+                    Just _ ->
+                        tile green "House"
+
+                    Nothing ->
+                        tile grey "Empty"
+            )
+        |> column
+            [ centerX
+            , centerY
+            , spacing 10
+            ]
+
+
+viewTiles tiles =
+    tiles
+        |> List.map renderColumn
+        |> row
+            [ centerX
+            , centerY
+            , padding 10
+            , spacing 10
+            ]
