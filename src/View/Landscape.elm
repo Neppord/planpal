@@ -1,7 +1,7 @@
 module View.Landscape exposing (..)
 
 import Colors exposing (..)
-import Data.Landscape exposing (Landscape, toMatrix)
+import Data.Landscape exposing (Landscape)
 import Element exposing (..)
 import Element.Background as Background
 import Element.Border as Border
@@ -15,7 +15,7 @@ landscape l =
         , Background.color dirtBrown
         ]
     <|
-        (viewTiles <| toMatrix l)
+        viewTiles l
 
 
 viewTiles tiles =
@@ -44,11 +44,12 @@ viewTiles tiles =
                     text title
 
         numberToTile n =
-            if n > 0 then
-                house
+            case n of
+                Just _ ->
+                    house
 
-            else
-                empty
+                Nothing ->
+                    empty
 
         renderColumn c =
             column
