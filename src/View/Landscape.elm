@@ -36,14 +36,15 @@ tile color title =
             text title
 
 
-renderColumn c =
-    let
-        house =
-            tile green "House"
+house =
+    tile green "House"
 
-        empty =
-            tile grey "Empty"
-    in
+
+empty =
+    tile grey "Empty"
+
+
+renderColumn c =
     c
         |> List.map ((Maybe.map <| always house) >> Maybe.withDefault empty)
         |> column
