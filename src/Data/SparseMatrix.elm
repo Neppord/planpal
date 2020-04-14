@@ -10,3 +10,8 @@ type alias SparseMatrix a =
 fill : a -> SparseMatrix a -> Matrix a
 fill a =
     Matrix.map (Maybe.withDefault a)
+
+
+map : (a -> b) -> SparseMatrix a -> SparseMatrix b
+map =
+    Matrix.map << Maybe.map
