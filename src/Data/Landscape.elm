@@ -1,8 +1,10 @@
 module Data.Landscape exposing (..)
 
+import Data.SparseMatrix exposing (SparseMatrix)
+
 
 type alias Landscape =
-    List (List (Maybe House))
+    SparseMatrix House
 
 
 type House
