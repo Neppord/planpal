@@ -2,6 +2,8 @@ module View.Landscape exposing (..)
 
 import Colors exposing (..)
 import Data.Landscape exposing (Landscape)
+import Data.Matrix as Matrix
+import Data.SparseMatrix as SparceMaterix
 import Element exposing (..)
 import Element.Background as Background
 import Element.Border as Border
@@ -44,22 +46,11 @@ empty =
     tile grey "Empty"
 
 
-renderColumn c =
-    c
-        |> List.map ((Maybe.map <| always house) >> Maybe.withDefault empty)
-        |> column
-            [ centerX
-            , centerY
-            , spacing 10
-            ]
-
-
+viewTiles : SparceMaterix.SparseMatrix b -> Element msg
 viewTiles tiles =
     tiles
-        |> List.map renderColumn
-        |> row
-            [ centerX
-            , centerY
-            , padding 10
-            , spacing 10
-            ]
+        |> SparceMaterix.map (always house)
+        |> SparceMaterix.fill empty
+        |> Matrix.columns
+        |> List.map (column [ centerX, centerY, spacing 10 ])
+        |> row [ centerX, centerY, padding 10, spacing 10 ]
