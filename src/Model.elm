@@ -62,9 +62,9 @@ houseIncome model =
 
         income =
             housesCoordinates
-                |> Set.map bonus
-                |> Set.map ((+) 10)
                 |> Set.toList
+                |> List.map bonus
+                |> List.map ((+) 10)
                 |> List.sum
     in
     model
