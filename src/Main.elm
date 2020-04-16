@@ -6,6 +6,7 @@ import Data.Game as Game
 import Data.Matrix as Matrix
 import Data.Msg exposing (Msg(..))
 import Data.Timeline as Timeline exposing (predict, unwrap)
+import Data.UI as UI
 import Element exposing (..)
 import Element.Background as Background
 import Element.Border as Border
@@ -27,23 +28,30 @@ main =
 update msg model =
     case msg of
         Next n ->
-            (List.repeat (n + 1) Timeline.next
-                |> List.foldl (>>) identity
-            )
-                model
+            model
+                |> UI.map
+                    (List.repeat (n + 1) Timeline.next
+                        |> List.foldl (>>) identity
+                    )
 
         Build building x y ->
             model
-                |> (Timeline.map << Game.mapLandscape)
-                    (Matrix.update (always <| Just building) x y)
+                |> UI.map
+                    ((Timeline.map << Game.mapLandscape)
+                        (Matrix.update (always <| Just building) x y)
+                    )
 
 
 view : Model -> Html Msg
 view model =
     layout [ height fill ] <|
         row [ height fill, width fill ]
-            [ leftPanel model
-            , unwrap model
+            [ model
+                |> UI.unwrap
+                |> leftPanel
+            , model
+                |> UI.unwrap
+                |> Timeline.unwrap
                 |> .landscape
                 |> landscape
             ]
