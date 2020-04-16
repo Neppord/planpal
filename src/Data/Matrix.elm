@@ -19,6 +19,19 @@ indexedMap f =
     List.indexedMap callback
 
 
+update : (a -> a) -> Int -> Int -> Matrix a -> Matrix a
+update f px py =
+    let
+        callback x y =
+            if px == x && py == y then
+                f
+
+            else
+                identity
+    in
+    indexedMap callback
+
+
 toList : Matrix a -> List a
 toList =
     List.concat

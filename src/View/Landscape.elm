@@ -3,13 +3,15 @@ module View.Landscape exposing (..)
 import Colors exposing (..)
 import Data.Landscape exposing (Landscape)
 import Data.Matrix as Matrix
+import Data.Msg exposing (Msg(..))
 import Data.SparseMatrix as SparceMaterix
 import Element exposing (..)
 import Element.Background as Background
 import Element.Border as Border
+import Element.Events exposing (onClick)
 
 
-landscape : Landscape -> Element msg
+landscape : Landscape -> Element Msg
 landscape l =
     el
         [ width fill
@@ -42,15 +44,16 @@ house =
     tile green "House"
 
 
-empty =
+empty x y =
     tile grey "Empty"
+        |> el [ onClick <| Build x y ]
 
 
-viewTiles : SparceMaterix.SparseMatrix b -> Element msg
+viewTiles : SparceMaterix.SparseMatrix b -> Element Msg
 viewTiles tiles =
     tiles
         |> SparceMaterix.map (always house)
-        |> SparceMaterix.fill empty
+        |> SparceMaterix.indexedFill empty
         |> Matrix.columns
         |> List.map (column [ centerX, centerY, spacing 10 ])
         |> row [ centerX, centerY, padding 10, spacing 10 ]

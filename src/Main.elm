@@ -2,6 +2,8 @@ module Main exposing (..)
 
 import Browser
 import Colors exposing (grey)
+import Data.Landscape exposing (House(..))
+import Data.Matrix as Matrix
 import Data.Msg exposing (Msg(..))
 import Data.Timeline as Timeline exposing (predict, unwrap)
 import Element exposing (..)
@@ -29,6 +31,11 @@ update msg model =
                 |> List.foldl (>>) identity
             )
                 model
+
+        Build x y ->
+            model
+                |> (Timeline.map << Model.mapLandscape)
+                    (Matrix.update (always <| Just House) x y)
 
 
 view : Model -> Html Msg

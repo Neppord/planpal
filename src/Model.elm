@@ -19,6 +19,10 @@ type alias Model =
     Timeline Int InnerModel
 
 
+mapLandscape f model =
+    { model | landscape = f model.landscape }
+
+
 mapStats f model =
     { model | stats = f model.stats }
 
