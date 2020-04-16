@@ -13,7 +13,7 @@ type House
 
 housingModel : Landscape
 housingModel =
-    [ [ Nothing, Just House, Nothing ]
-    , [ Just House, Just House, Nothing ]
-    , [ Just House, Nothing, Nothing ]
+    [ [ Nothing, Nothing, Nothing ]
+    , [ Nothing, Nothing, Nothing ]
+    , [ Nothing, Nothing, Nothing ]
     ]
