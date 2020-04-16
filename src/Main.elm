@@ -2,7 +2,7 @@ module Main exposing (..)
 
 import Browser
 import Colors exposing (grey)
-import Data.Landscape exposing (Building(..))
+import Data.Game as Game
 import Data.Matrix as Matrix
 import Data.Msg exposing (Msg(..))
 import Data.Timeline as Timeline exposing (predict, unwrap)
@@ -34,7 +34,7 @@ update msg model =
 
         Build building x y ->
             model
-                |> (Timeline.map << Model.mapLandscape)
+                |> (Timeline.map << Game.mapLandscape)
                     (Matrix.update (always <| Just building) x y)
 
 
