@@ -10,6 +10,7 @@ import Element exposing (..)
 import Element.Background as Background
 import Element.Border as Border
 import Element.Events exposing (onClick)
+import Element.Font as Font
 
 
 landscape : UI Landscape -> Element Msg
@@ -55,10 +56,11 @@ tile color title =
     el
         [ Background.color color
         , padding 15
-        , height <| px 75
-        , width <| px 75
+        , height <| px 50
+        , width <| px 50
         , clip
         , Border.rounded 5
+        , Font.size 14
         ]
     <|
         el
