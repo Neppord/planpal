@@ -32,10 +32,10 @@ update msg model =
             )
                 model
 
-        Build x y ->
+        Build building x y ->
             model
                 |> (Timeline.map << Model.mapLandscape)
-                    (Matrix.update (always <| Just House) x y)
+                    (Matrix.update (always <| Just building) x y)
 
 
 view : Model -> Html Msg

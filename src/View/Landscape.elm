@@ -1,7 +1,7 @@
 module View.Landscape exposing (..)
 
 import Colors exposing (..)
-import Data.Landscape exposing (Landscape)
+import Data.Landscape as House exposing (House(..), Landscape)
 import Data.Matrix as Matrix
 import Data.Msg exposing (Msg(..))
 import Data.SparseMatrix as SparceMaterix
@@ -46,7 +46,7 @@ house =
 
 empty x y =
     tile grey "Empty"
-        |> el [ onClick <| Build x y ]
+        |> el [ onClick <| Build House.House x y ]
 
 
 viewTiles : SparceMaterix.SparseMatrix b -> Element Msg
