@@ -37,6 +37,11 @@ items =
     List.concat
 
 
+indexedItems : (Int -> Int -> a -> b) -> Matrix a -> List b
+indexedItems f =
+    indexedMap f >> items
+
+
 columns : Matrix a -> List (List a)
 columns =
     identity
