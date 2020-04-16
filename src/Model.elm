@@ -7,8 +7,12 @@ import Data.Timeline exposing (Timeline, queue, wrap)
 import Set
 
 
-type alias Stats =
+type alias Money =
     Int
+
+
+type alias Stats =
+    Money
 
 
 type alias InnerModel =
@@ -29,7 +33,7 @@ mapStats f model =
     { model | stats = f model.stats }
 
 
-addToMoney : Int -> InnerModel -> InnerModel
+addToMoney : Money -> InnerModel -> InnerModel
 addToMoney amount =
     mapStats ((+) amount)
 
@@ -41,9 +45,25 @@ houseIncome model =
             SparseMatrix.indexedItems (\x y _ -> ( x, y )) model.landscape
                 |> Set.fromList
 
+        bonus : ( Int, Int ) -> Money
+        bonus ( x, y ) =
+            let
+                check p =
+                    Set.member p housesCoordinates
+            in
+            [ check ( x - 1, y )
+            , check ( x + 1, y )
+            , check ( x, y - 1 )
+            , check ( x, y + 1 )
+            ]
+                |> List.filter identity
+                |> List.map (always 5)
+                |> List.sum
+
         income =
             housesCoordinates
-                |> Set.map (always 10)
+                |> Set.map bonus
+                |> Set.map ((+) 10)
                 |> Set.toList
                 |> List.sum
     in
