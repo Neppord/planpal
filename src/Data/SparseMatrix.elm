@@ -39,3 +39,27 @@ items m =
                     Just a ->
                         [ a ]
             )
+
+
+compact : List (Maybe a) -> List a
+compact =
+    List.concatMap
+        (\n ->
+            case n of
+                Nothing ->
+                    []
+
+                Just a ->
+                    [ a ]
+        )
+
+
+indexedItems : (Int -> Int -> a -> b) -> SparseMatrix a -> List b
+indexedItems f m =
+    let
+        callback x y =
+            Maybe.map <| f x y
+    in
+    m
+        |> Matrix.indexedItems callback
+        |> compact
