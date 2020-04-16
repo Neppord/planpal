@@ -4,6 +4,7 @@ import Data.Event exposing (at, every)
 import Data.Landscape exposing (Landscape, housingModel)
 import Data.SparseMatrix as SparseMatrix
 import Data.Timeline exposing (Timeline, queue, wrap)
+import Set
 
 
 type alias Stats =
@@ -36,12 +37,14 @@ addToMoney amount =
 houseIncome : InnerModel -> InnerModel
 houseIncome model =
     let
-        houses =
-            SparseMatrix.items model.landscape
+        housesCoordinates =
+            SparseMatrix.indexedItems (\x y _ -> ( x, y )) model.landscape
+                |> Set.fromList
 
         income =
-            houses
-                |> List.map (always 10)
+            housesCoordinates
+                |> Set.map (always 10)
+                |> Set.toList
                 |> List.sum
     in
     model
