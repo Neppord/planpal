@@ -4,7 +4,7 @@ import Colors exposing (..)
 import Data.Landscape as House exposing (House(..), Landscape)
 import Data.Matrix as Matrix
 import Data.Msg exposing (Msg(..))
-import Data.SparseMatrix as SparceMaterix
+import Data.SparseMatrix as SparseMatrix
 import Element exposing (..)
 import Element.Background as Background
 import Element.Border as Border
@@ -49,11 +49,11 @@ empty x y =
         |> el [ onClick <| Build House.House x y ]
 
 
-viewTiles : SparceMaterix.SparseMatrix b -> Element Msg
+viewTiles : SparseMatrix.SparseMatrix b -> Element Msg
 viewTiles tiles =
     tiles
-        |> SparceMaterix.map (always house)
-        |> SparceMaterix.indexedFill empty
+        |> SparseMatrix.map (always house)
+        |> SparseMatrix.indexedFill empty
         |> Matrix.columns
         |> List.map (column [ centerX, centerY, spacing 10 ])
         |> row [ centerX, centerY, padding 10, spacing 10 ]
