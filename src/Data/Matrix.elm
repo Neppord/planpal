@@ -32,8 +32,8 @@ update f px py =
     indexedMap callback
 
 
-toList : Matrix a -> List a
-toList =
+items : Matrix a -> List a
+items =
     List.concat
 
 

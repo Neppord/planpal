@@ -29,7 +29,7 @@ map =
 items : SparseMatrix a -> List a
 items m =
     m
-        |> Matrix.toList
+        |> Matrix.items
         |> List.concatMap
             (\n ->
                 case n of
