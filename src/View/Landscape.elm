@@ -1,7 +1,7 @@
 module View.Landscape exposing (..)
 
 import Colors exposing (..)
-import Data.Landscape as House exposing (Building(..), Landscape)
+import Data.Landscape exposing (Building(..), Landscape)
 import Data.Matrix as Matrix
 import Data.Msg exposing (Msg(..))
 import Data.SparseMatrix as SparseMatrix
@@ -45,17 +45,18 @@ house =
     tile green "House"
 
 
-empty x y =
+empty building x y =
     tile grey "Empty"
-        |> el [ onClick <| Build House.House x y ]
+        |> el [ onClick <| Build building x y ]
 
 
 viewTiles : UI Landscape -> Element Msg
-viewTiles tiles =
-    tiles
-        |> UI.unwrap
-        |> SparseMatrix.map (always house)
-        |> SparseMatrix.indexedFill empty
-        |> Matrix.columns
-        |> List.map (column [ centerX, centerY, spacing 10 ])
-        |> row [ centerX, centerY, padding 10, spacing 10 ]
+viewTiles ui =
+    case ui of
+        UI.Build tiles building ->
+            tiles
+                |> SparseMatrix.map (always house)
+                |> SparseMatrix.indexedFill (empty building)
+                |> Matrix.columns
+                |> List.map (column [ centerX, centerY, spacing 10 ])
+                |> row [ centerX, centerY, padding 10, spacing 10 ]
