@@ -2,7 +2,7 @@ module Main exposing (..)
 
 import Browser
 import Colors exposing (grey)
-import Data.Landscape exposing (House(..))
+import Data.Landscape exposing (Building(..))
 import Data.Matrix as Matrix
 import Data.Msg exposing (Msg(..))
 import Data.Timeline as Timeline exposing (predict, unwrap)

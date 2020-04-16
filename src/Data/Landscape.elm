@@ -4,10 +4,10 @@ import Data.SparseMatrix exposing (SparseMatrix)
 
 
 type alias Landscape =
-    SparseMatrix House
+    SparseMatrix Building
 
 
-type House
+type Building
     = House
 
 

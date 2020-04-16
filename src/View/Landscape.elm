@@ -1,7 +1,7 @@
 module View.Landscape exposing (..)
 
 import Colors exposing (..)
-import Data.Landscape as House exposing (House(..), Landscape)
+import Data.Landscape as House exposing (Building(..), Landscape)
 import Data.Matrix as Matrix
 import Data.Msg exposing (Msg(..))
 import Data.SparseMatrix as SparseMatrix

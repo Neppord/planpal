@@ -1,8 +1,8 @@
 module Data.Msg exposing (..)
 
-import Data.Landscape exposing (House(..))
+import Data.Landscape exposing (Building(..))
 
 
 type Msg
     = Next Int
-    | Build House Int Int
+    | Build Building Int Int
