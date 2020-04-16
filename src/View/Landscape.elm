@@ -14,13 +14,12 @@ import Element.Events exposing (onClick)
 
 landscape : UI Landscape -> Element Msg
 landscape l =
-    el
-        [ width fill
-        , height fill
-        , Background.color dirtBrown
-        ]
-    <|
-        viewTiles l
+    viewTiles l
+        |> el
+            [ width fill
+            , height fill
+            , Background.color dirtBrown
+            ]
 
 
 tile color title =
