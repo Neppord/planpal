@@ -1,7 +1,7 @@
 module Model exposing (..)
 
 import Data.Event exposing (at, every)
-import Data.Landscape exposing (Landscape, housingModel)
+import Data.Landscape exposing (Building(..), Landscape, housingModel)
 import Data.SparseMatrix as SparseMatrix
 import Data.Timeline exposing (Timeline, queue, wrap)
 import Set
@@ -42,7 +42,9 @@ houseIncome : InnerModel -> InnerModel
 houseIncome model =
     let
         housesCoordinates =
-            SparseMatrix.indexedItems (\x y _ -> ( x, y )) model.landscape
+            model.landscape
+                |> SparseMatrix.filter ((==) House)
+                |> SparseMatrix.indexedItems (\x y _ -> ( x, y ))
                 |> Set.fromList
 
         bonus : ( Int, Int ) -> Money
