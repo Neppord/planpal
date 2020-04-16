@@ -11,6 +11,7 @@ import Element.Background as Background
 import Element.Border as Border
 import Element.Events exposing (onClick)
 import Element.Font as Font
+import View.Extras exposing (unSelectable)
 
 
 landscape : UI Landscape -> Element Msg
@@ -61,6 +62,7 @@ tile color title =
         , clip
         , Border.rounded 5
         , Font.size 14
+        , unSelectable
         ]
     <|
         el
