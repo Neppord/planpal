@@ -5,13 +5,14 @@ import Data.Landscape as House exposing (Building(..), Landscape)
 import Data.Matrix as Matrix
 import Data.Msg exposing (Msg(..))
 import Data.SparseMatrix as SparseMatrix
+import Data.UI as UI exposing (UI)
 import Element exposing (..)
 import Element.Background as Background
 import Element.Border as Border
 import Element.Events exposing (onClick)
 
 
-landscape : Landscape -> Element Msg
+landscape : UI Landscape -> Element Msg
 landscape l =
     el
         [ width fill
@@ -49,9 +50,10 @@ empty x y =
         |> el [ onClick <| Build House.House x y ]
 
 
-viewTiles : SparseMatrix.SparseMatrix b -> Element Msg
+viewTiles : UI Landscape -> Element Msg
 viewTiles tiles =
     tiles
+        |> UI.unwrap
         |> SparseMatrix.map (always house)
         |> SparseMatrix.indexedFill empty
         |> Matrix.columns

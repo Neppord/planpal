@@ -50,9 +50,8 @@ view model =
                 |> UI.unwrap
                 |> leftPanel
             , model
-                |> UI.unwrap
-                |> Timeline.unwrap
-                |> .landscape
+                |> UI.map Timeline.unwrap
+                |> UI.map .landscape
                 |> landscape
             ]
 
