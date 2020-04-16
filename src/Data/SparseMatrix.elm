@@ -24,3 +24,18 @@ indexedFill f =
 map : (a -> b) -> SparseMatrix a -> SparseMatrix b
 map =
     Matrix.map << Maybe.map
+
+
+items : SparseMatrix a -> List a
+items m =
+    m
+        |> Matrix.toList
+        |> List.concatMap
+            (\n ->
+                case n of
+                    Nothing ->
+                        []
+
+                    Just a ->
+                        [ a ]
+            )
