@@ -1,7 +1,7 @@
 module View.Landscape exposing (..)
 
 import Colors exposing (..)
-import Data.Landscape exposing (Building(..), Landscape)
+import Data.Landscape as Landscape exposing (Building(..), Landscape)
 import Data.Matrix as Matrix
 import Data.Msg exposing (Msg(..))
 import Data.SparseMatrix as SparseMatrix
@@ -13,12 +13,41 @@ import Element.Events exposing (onClick)
 
 
 landscape : UI Landscape -> Element Msg
-landscape l =
-    viewTiles l
-        |> el
+landscape ui =
+    [ case ui of
+        UI.Build _ building ->
+            buildDrawer building
+    , viewTiles ui
+    ]
+        |> column
             [ width fill
             , height fill
             , Background.color dirtBrown
+            ]
+
+
+buildDrawer building =
+    let
+        selected =
+            el
+                [ Border.glow Colors.dirtBrown 5
+                , Border.rounded 5
+                ]
+
+        selectOn item =
+            if building == item then
+                selected
+
+            else
+                identity
+    in
+    [ house |> selectOn Landscape.House
+    ]
+        |> row
+            [ width fill
+            , Background.color Colors.grey
+            , padding 10
+            , spacing 10
             ]
 
 
