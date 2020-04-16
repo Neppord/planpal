@@ -79,5 +79,5 @@ init =
         { landscape = housingModel
         , stats = 0
         }
-        |> queue (every 100 houseIncome |> at 0)
-        |> queue (every 300 (addToMoney -300) |> at 300)
+        |> queue (houseIncome |> every 100 |> at 0)
+        |> queue (addToMoney -300 |> every 300 |> at 300)
