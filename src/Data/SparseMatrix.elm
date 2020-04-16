@@ -26,6 +26,19 @@ map =
     Matrix.map << Maybe.map
 
 
+filter : (a -> Bool) -> SparseMatrix a -> SparseMatrix a
+filter predicate =
+    let
+        callback v =
+            if predicate v then
+                Just v
+
+            else
+                Nothing
+    in
+    Matrix.map <| Maybe.andThen callback
+
+
 items : SparseMatrix a -> List a
 items m =
     m
