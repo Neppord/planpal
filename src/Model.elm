@@ -27,6 +27,7 @@ mapStats f model =
     { model | stats = f model.stats }
 
 
+addToMoney : Int -> InnerModel -> InnerModel
 addToMoney amount =
     mapStats ((+) amount)
 
