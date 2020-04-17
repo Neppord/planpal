@@ -93,6 +93,22 @@ addToMoney amount =
     mapMoney ((+) amount)
 
 
+forestIncome : Game -> Game
+forestIncome game =
+    let
+        forests =
+            game.landscape
+                |> SparseMatrix.filter ((==) Forest)
+
+        income =
+            forests
+                |> SparseMatrix.map (always 10)
+                |> SparseMatrix.items
+                |> List.sum
+    in
+    mapWood ((+) income) game
+
+
 houseIncome : Game -> Game
 houseIncome model =
     let
