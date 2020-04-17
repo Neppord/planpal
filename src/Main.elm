@@ -107,9 +107,11 @@ icon color =
         none
 
 
+stats : Game.Stats -> Element msg
 stats s =
     [ [ text "$", integer s.money ]
     , [ icon Colors.dirtBrown, integer s.wood ]
+    , [ icon Colors.blue, integer s.water ]
     ]
         |> List.map stat
         |> column

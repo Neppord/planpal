@@ -11,6 +11,7 @@ init =
     , stats =
         { money = 0
         , wood = 20
+        , water = 0
         }
     }
 
@@ -23,9 +24,14 @@ type alias Wood =
     Int
 
 
+type alias Water =
+    Int
+
+
 type alias Stats =
     { money : Money
     , wood : Wood
+    , water : Water
     }
 
 
@@ -39,6 +45,11 @@ mapLandscape f model =
     { model | landscape = f model.landscape }
 
 
+getMoney : Game -> Money
+getMoney m =
+    m.stats.money
+
+
 mapMoney : (Money -> Money) -> Game -> Game
 mapMoney =
     let
@@ -48,6 +59,11 @@ mapMoney =
     mapStats << callback
 
 
+getWood : Game -> Wood
+getWood m =
+    m.stats.wood
+
+
 mapWood : (Wood -> Wood) -> Game -> Game
 mapWood =
     let
@@ -55,6 +71,16 @@ mapWood =
             { s | wood = f s.wood }
     in
     mapStats << callback
+
+
+getWater : Game -> Water
+getWater m =
+    m.stats.water
+
+
+updateWater : (Water -> Water) -> Game -> Game
+updateWater f =
+    mapStats <| \s -> { s | water = f s.water }
 
 
 mapStats : (Stats -> Stats) -> Game -> Game
