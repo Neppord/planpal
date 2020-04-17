@@ -86,6 +86,11 @@ stats s =
             , Background.color <| rgb 1 1 1
             , padding 10
             , Border.rounded 5
+            ]
+        |> List.singleton
+        |> column
+            [ width fill
+            , spacing 10
             , Font.family
                 [ Font.external
                     { url = "https://fonts.googleapis.com/css2?family=Kaushan+Script&display=swap"
