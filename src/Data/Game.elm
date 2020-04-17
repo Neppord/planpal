@@ -8,7 +8,10 @@ import Set
 init : Game
 init =
     { landscape = housingModel
-    , stats = { money = 0 }
+    , stats =
+        { money = 0
+        , wood = 0
+        }
     }
 
 
@@ -16,8 +19,14 @@ type alias Money =
     Int
 
 
+type alias Wood =
+    Int
+
+
 type alias Stats =
-    { money : Money }
+    { money : Money
+    , wood : Wood
+    }
 
 
 type alias Game =
