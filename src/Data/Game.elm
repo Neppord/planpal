@@ -10,7 +10,7 @@ init =
     { landscape = housingModel
     , stats =
         { money = 0
-        , wood = 0
+        , wood = 20
         }
     }
 
