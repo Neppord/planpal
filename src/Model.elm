@@ -15,5 +15,5 @@ init =
     Game.init
         |> Timeline.wrap
         |> Timeline.queue (houseIncome >> forestIncome |> every 100 |> at 0)
-        |> Timeline.queue (addToMoney -300 |> every 300 |> at 300)
+        |> Timeline.queue (addToMoney -1000 |> every 300 |> at 900)
         |> UI.wrap
