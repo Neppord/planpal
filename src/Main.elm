@@ -89,8 +89,19 @@ integer =
     String.fromInt >> text
 
 
+icon color =
+    el
+        [ Background.color color
+        , width <| px 20
+        , height <| px 20
+        , Border.rounded 5
+        ]
+        none
+
+
 stats s =
     [ [ text "$", integer s.money ]
+    , [ icon Colors.dirtBrown, integer s.wood ]
     ]
         |> List.map stat
         |> column
