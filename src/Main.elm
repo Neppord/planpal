@@ -36,11 +36,19 @@ update msg model =
                     )
 
         Build building x y ->
-            model
-                |> UI.map
-                    ((Timeline.map << Game.mapLandscape)
-                        (Matrix.update (always <| Just building) x y)
-                    )
+            let
+                build game =
+                    game
+                        |> Game.mapLandscape
+                            (Matrix.update (always <| Just building) x y)
+                        |> Game.mapWood ((+) -10)
+            in
+            if (UI.unwrap >> Timeline.unwrap >> .stats >> .wood) model >= 10 then
+                model
+                    |> UI.map (Timeline.map build)
+
+            else
+                model
 
 
 view : Model -> Html Msg

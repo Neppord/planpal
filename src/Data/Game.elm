@@ -48,6 +48,15 @@ mapMoney =
     mapStats << callback
 
 
+mapWood : (Wood -> Wood) -> Game -> Game
+mapWood =
+    let
+        callback f s =
+            { s | wood = f s.wood }
+    in
+    mapStats << callback
+
+
 mapStats : (Stats -> Stats) -> Game -> Game
 mapStats f model =
     { model | stats = f model.stats }
