@@ -16,8 +16,8 @@ import View.Extras exposing (unSelectable)
 
 landscape : UI Landscape -> Element Msg
 landscape ui =
-    [ case ui of
-        UI.Build _ building ->
+    [ case UI.selectedTool ui of
+        UI.Build building ->
             buildDrawer building
     , viewTiles ui
     ]
@@ -101,9 +101,10 @@ buildingToTile n =
 
 viewTiles : UI Landscape -> Element Msg
 viewTiles ui =
-    case ui of
-        UI.Build tiles building ->
-            tiles
+    case UI.selectedTool ui of
+        UI.Build building ->
+            ui
+                |> UI.unwrap
                 |> SparseMatrix.map buildingToTile
                 |> SparseMatrix.indexedFill (empty building)
                 |> Matrix.columns

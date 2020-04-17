@@ -4,30 +4,42 @@ import Data.Landscape as Landscape
 
 
 type UI a
-    = Build a Landscape.Building
+    = UI a Selection Info
+
+
+type Selection
+    = Build Landscape.Building
+
+
+type Info
+    = NoInfo
 
 
 map : (a -> b) -> UI a -> UI b
 map f ui =
     case ui of
-        Build a building ->
-            Build (f a) building
+        UI a selection info ->
+            UI (f a) selection info
 
 
 wrap : a -> UI a
 wrap a =
-    Build a Landscape.House
+    UI a (Build Landscape.House) NoInfo
 
 
 unwrap : UI a -> a
 unwrap ui =
     case ui of
-        Build a _ ->
+        UI a _ _ ->
             a
+
+
+selectedTool (UI _ tool _) =
+    tool
 
 
 selectBuildTool : Landscape.Building -> UI a -> UI a
 selectBuildTool building ui =
     case ui of
-        Build a _ ->
-            Build a building
+        UI a _ info ->
+            UI a (Build building) info
