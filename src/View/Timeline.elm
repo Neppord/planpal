@@ -35,14 +35,14 @@ expense =
 
 timeline current states =
     let
-        futureStats =
-            List.map .stats states
+        futureMoney =
+            List.map (.stats >> .money) states
 
         stats =
-            current.stats :: futureStats
+            current.stats.money :: futureMoney
 
         diffs =
-            List.map2 (-) futureStats stats
+            List.map2 (-) futureMoney stats
     in
     diffs
         |> List.indexedMap

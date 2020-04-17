@@ -10,7 +10,7 @@ type alias Money =
 
 
 type alias Stats =
-    Money
+    { money : Money }
 
 
 type alias Game =
@@ -23,13 +23,23 @@ mapLandscape f model =
     { model | landscape = f model.landscape }
 
 
+mapMoney : (Money -> Money) -> Game -> Game
+mapMoney =
+    let
+        callback f s =
+            { s | money = f s.money }
+    in
+    mapStats << callback
+
+
+mapStats : (Stats -> Stats) -> Game -> Game
 mapStats f model =
     { model | stats = f model.stats }
 
 
 addToMoney : Money -> Game -> Game
 addToMoney amount =
-    mapStats ((+) amount)
+    mapMoney ((+) amount)
 
 
 houseIncome : Game -> Game
@@ -63,5 +73,4 @@ houseIncome model =
                 |> List.map ((+) 10)
                 |> List.sum
     in
-    model
-        |> mapStats ((+) income)
+    mapMoney ((+) income) model

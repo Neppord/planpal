@@ -14,7 +14,7 @@ type alias Model =
 init : Model
 init =
     { landscape = housingModel
-    , stats = 0
+    , stats = { money = 0 }
     }
         |> Timeline.wrap
         |> Timeline.queue (houseIncome |> every 100 |> at 0)

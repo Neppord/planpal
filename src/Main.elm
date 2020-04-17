@@ -17,6 +17,7 @@ import View.Landscape exposing (landscape)
 import View.Timeline exposing (timeline)
 
 
+main : Program () Model Msg
 main =
     Browser.sandbox
         { init = init
@@ -76,7 +77,7 @@ leftPanel model =
 
 stats s =
     [ text "$"
-    , String.fromInt s
+    , String.fromInt s.money
         |> text
         |> el [ alignRight ]
     ]
