@@ -36,14 +36,18 @@ buildDrawer building =
                 , Border.rounded 5
                 ]
 
+        select item =
+            el [ onClick <| PickTool item ]
+
         selectOn item =
             if building == item then
                 selected
 
             else
-                identity
+                select item
     in
     [ house |> selectOn Landscape.House
+    , forest |> selectOn Landscape.Forest
     ]
         |> row
             [ width fill
@@ -77,9 +81,22 @@ house =
     tile green "House"
 
 
+forest =
+    tile darkGreen "Forest"
+
+
 empty building x y =
     tile grey "Empty"
         |> el [ onClick <| Build building x y ]
+
+
+buildingToTile n =
+    case n of
+        House ->
+            house
+
+        Forest ->
+            forest
 
 
 viewTiles : UI Landscape -> Element Msg
@@ -87,7 +104,7 @@ viewTiles ui =
     case ui of
         UI.Build tiles building ->
             tiles
-                |> SparseMatrix.map (always house)
+                |> SparseMatrix.map buildingToTile
                 |> SparseMatrix.indexedFill (empty building)
                 |> Matrix.columns
                 |> List.map (column [ centerX, centerY, spacing 10 ])

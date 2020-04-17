@@ -1,6 +1,6 @@
 module Colors exposing (..)
 
-import Element exposing (rgb)
+import Element exposing (rgb, rgb255)
 
 
 red =
@@ -9,6 +9,10 @@ red =
 
 green =
     rgb 0.5 0.9 0.5
+
+
+darkGreen =
+    rgb255 9 62 10
 
 
 blue =

@@ -3,6 +3,7 @@ module Main exposing (..)
 import Browser
 import Colors exposing (grey)
 import Data.Game as Game
+import Data.Landscape as Landscape
 import Data.Matrix as Matrix
 import Data.Msg exposing (Msg(..))
 import Data.Timeline as Timeline exposing (predict, unwrap)
@@ -27,6 +28,30 @@ main =
 
 
 update msg model =
+    let
+        payFor : Landscape.Building -> Game.Game -> Maybe Game.Game
+        payFor building game =
+            game
+                |> (case building of
+                        Landscape.House ->
+                            if Game.getWood game >= 10 then
+                                Just << Game.mapWood ((+) -10)
+
+                            else
+                                always Nothing
+
+                        Landscape.Forest ->
+                            if Game.getMoney game >= 10 then
+                                Just << Game.mapMoney ((+) -10)
+
+                            else
+                                always Nothing
+                   )
+
+        place building x y =
+            Game.mapLandscape
+                (Matrix.update (always <| Just building) x y)
+    in
     case msg of
         Next n ->
             model
@@ -39,16 +64,15 @@ update msg model =
             let
                 build game =
                     game
-                        |> Game.mapLandscape
-                            (Matrix.update (always <| Just building) x y)
-                        |> Game.mapWood ((+) -10)
+                        |> payFor building
+                        |> Maybe.map (place building x y)
+                        |> Maybe.withDefault game
             in
-            if (UI.unwrap >> Timeline.unwrap >> .stats >> .wood) model >= 10 then
-                model
-                    |> UI.map (Timeline.map build)
+            model
+                |> UI.map (Timeline.map build)
 
-            else
-                model
+        PickTool building ->
+            UI.selectBuildTool building model
 
 
 view : Model -> Html Msg

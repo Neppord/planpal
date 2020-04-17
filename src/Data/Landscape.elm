@@ -9,6 +9,7 @@ type alias Landscape =
 
 type Building
     = House
+    | Forest
 
 
 housingModel : Landscape
