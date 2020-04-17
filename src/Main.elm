@@ -93,12 +93,21 @@ leftPanel model =
     let
         innerModel =
             unwrap model
+
+        predictions =
+            predict 10 model
+
+        nextStats =
+            predictions
+                |> List.head
+                |> Maybe.withDefault innerModel
+                |> .stats
     in
-    [ stats innerModel.stats
-    , timeline innerModel <| predict 10 model
+    [ stats innerModel.stats nextStats
+    , timeline innerModel <| predictions
     ]
         |> column
-            [ width <| px 150
+            [ width <| px 200
             , height fill
             , Background.color <| grey
             , padding 15
@@ -113,7 +122,7 @@ stat =
         , Background.color <| rgb 1 1 1
         , padding 10
         , Border.rounded 5
-        , spaceEvenly
+        , spacing 10
         ]
 
 
@@ -131,11 +140,41 @@ icon color =
         none
 
 
-stats : Game.Stats -> Element msg
-stats s =
-    [ [ text "$", integer s.money ]
-    , [ icon Colors.dirtBrown, integer s.wood ]
-    , [ icon Colors.blue, integer s.water ]
+value =
+    el [ width fill, Font.alignRight ]
+
+
+stats : Game.Stats -> Game.Stats -> Element msg
+stats s next =
+    let
+        moneyDiff =
+            next.money - s.money
+
+        woodDiff =
+            next.wood - s.wood
+
+        diff : Int -> Element msg
+        diff amount =
+            case compare amount 0 of
+                LT ->
+                    integer amount
+                        |> el [ Font.color Colors.red ]
+
+                EQ ->
+                    none
+
+                GT ->
+                    String.fromInt amount
+                        |> (++) "+"
+                        |> text
+                        |> el
+                            [ Font.color Colors.green
+                            , width shrink
+                            ]
+    in
+    [ [ text "$", value <| integer s.money, diff moneyDiff ]
+    , [ icon Colors.dirtBrown, value <| integer s.wood, diff woodDiff ]
+    , [ icon Colors.blue, value <| integer s.water ]
     ]
         |> List.map stat
         |> column
