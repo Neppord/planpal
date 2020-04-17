@@ -1,8 +1,15 @@
 module Data.Game exposing (..)
 
-import Data.Landscape exposing (Building(..), Landscape)
+import Data.Landscape exposing (Building(..), Landscape, housingModel)
 import Data.SparseMatrix as SparseMatrix
 import Set
+
+
+init : Game
+init =
+    { landscape = housingModel
+    , stats = { money = 0 }
+    }
 
 
 type alias Money =

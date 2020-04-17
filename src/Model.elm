@@ -1,8 +1,7 @@
 module Model exposing (..)
 
 import Data.Event exposing (at, every)
-import Data.Game exposing (Game, addToMoney, houseIncome)
-import Data.Landscape exposing (Building(..), Landscape, housingModel)
+import Data.Game as Game exposing (Game, addToMoney, houseIncome)
 import Data.Timeline as Timeline exposing (Timeline)
 import Data.UI as UI exposing (UI)
 
@@ -13,9 +12,7 @@ type alias Model =
 
 init : Model
 init =
-    { landscape = housingModel
-    , stats = { money = 0 }
-    }
+    Game.init
         |> Timeline.wrap
         |> Timeline.queue (houseIncome |> every 100 |> at 0)
         |> Timeline.queue (addToMoney -300 |> every 300 |> at 300)
