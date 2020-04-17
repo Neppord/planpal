@@ -75,19 +75,24 @@ leftPanel model =
             ]
 
 
+stat =
+    row
+        [ width fill
+        , Background.color <| rgb 1 1 1
+        , padding 10
+        , Border.rounded 5
+        , spaceEvenly
+        ]
+
+
+integer =
+    String.fromInt >> text
+
+
 stats s =
-    [ text "$"
-    , String.fromInt s.money
-        |> text
-        |> el [ alignRight ]
+    [ [ text "$", integer s.money ]
     ]
-        |> row
-            [ width fill
-            , Background.color <| rgb 1 1 1
-            , padding 10
-            , Border.rounded 5
-            ]
-        |> List.singleton
+        |> List.map stat
         |> column
             [ width fill
             , spacing 10
