@@ -85,7 +85,11 @@ predict n data events =
     else
         case next data events of
             Just ( nextData, nextEvents ) ->
-                nextData :: predict (n - 1) nextData nextEvents
+                if nextData == data then
+                    predict n nextData nextEvents
+
+                else
+                    nextData :: predict (n - 1) nextData nextEvents
 
             Nothing ->
                 []

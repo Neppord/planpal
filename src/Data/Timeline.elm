@@ -34,6 +34,17 @@ next (Timeline events data) =
             Timeline events data
 
 
+nextReal : Timeline time data -> Timeline time data
+nextReal (Timeline currentEvents currentData) =
+    case next (Timeline currentEvents currentData) of
+        Timeline events data ->
+            if data == currentData then
+                nextReal (Timeline events data)
+
+            else
+                Timeline events data
+
+
 predict : Int -> Timeline time data -> List data
 predict n (Timeline events data) =
     Event.predict n data events

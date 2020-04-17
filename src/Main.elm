@@ -31,7 +31,7 @@ update msg model =
         Next n ->
             model
                 |> UI.map
-                    (List.repeat (n + 1) Timeline.next
+                    (List.repeat (n + 1) Timeline.nextReal
                         |> List.foldl (>>) identity
                     )
 
