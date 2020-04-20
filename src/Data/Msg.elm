@@ -7,3 +7,4 @@ type Msg
     = Next Int
     | Build Building Int Int
     | PickTool Building
+    | ExpandRight

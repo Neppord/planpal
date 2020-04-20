@@ -6,6 +6,7 @@ import Data.Game as Game
 import Data.Landscape as Landscape
 import Data.Matrix as Matrix
 import Data.Msg exposing (Msg(..))
+import Data.SparseMatrix as SparseMatrix
 import Data.Timeline as Timeline exposing (predict, unwrap)
 import Data.UI as UI
 import Element exposing (..)
@@ -48,6 +49,15 @@ update msg model =
                                 always Nothing
                    )
 
+        payForExpand game =
+            game
+                |> (if Game.getMoney game >= 100 then
+                        Just << Game.mapMoney ((+) -100)
+
+                    else
+                        always Nothing
+                   )
+
         place building x y =
             Game.mapLandscape
                 (Matrix.update (always <| Just building) x y)
@@ -73,6 +83,16 @@ update msg model =
 
         PickTool building ->
             UI.selectBuildTool building model
+
+        ExpandRight ->
+            (UI.map << Timeline.map)
+                (\game ->
+                    game
+                        |> payForExpand
+                        |> Maybe.map (Game.mapLandscape SparseMatrix.growRight)
+                        |> Maybe.withDefault game
+                )
+                model
 
 
 view : Model -> Html Msg

@@ -76,3 +76,18 @@ indexedItems f m =
     m
         |> Matrix.indexedItems callback
         |> compact
+
+
+growRight : SparseMatrix a -> SparseMatrix a
+growRight m =
+    let
+        size =
+            List.head m
+                |> Maybe.map List.length
+                |> Maybe.withDefault 0
+
+        column : List (Maybe a)
+        column =
+            List.repeat size Nothing
+    in
+    m ++ [ column ]

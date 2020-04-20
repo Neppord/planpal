@@ -101,6 +101,11 @@ buildingToTile n =
 
 viewTiles : UI Landscape -> Element Msg
 viewTiles ui =
+    let
+        expandRight =
+            tile grey "Expand"
+                |> el [ onClick ExpandRight, centerY, alpha 0.5 ]
+    in
     case UI.selectedTool ui of
         UI.Build building ->
             ui
@@ -109,4 +114,9 @@ viewTiles ui =
                 |> SparseMatrix.indexedFill (empty building)
                 |> Matrix.columns
                 |> List.map (column [ centerX, centerY, spacing 10 ])
-                |> row [ centerX, centerY, padding 10, spacing 10 ]
+                |> row [ padding 10, spacing 10 ]
+                |> el
+                    [ onRight expandRight
+                    , centerX
+                    , centerY
+                    ]
