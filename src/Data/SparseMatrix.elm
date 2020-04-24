@@ -82,9 +82,7 @@ growRight : SparseMatrix a -> SparseMatrix a
 growRight m =
     let
         size =
-            List.head m
-                |> Maybe.map List.length
-                |> Maybe.withDefault 0
+            Matrix.rowCount m
 
         column : List (Maybe a)
         column =
