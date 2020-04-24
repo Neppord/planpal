@@ -52,6 +52,13 @@ columnCount =
     List.length
 
 
+rowCount : Matrix a -> Int
+rowCount =
+    List.head
+        >> Maybe.map List.length
+        >> Maybe.withDefault 0
+
+
 fromColumns : List (List a) -> Matrix a
 fromColumns =
     identity

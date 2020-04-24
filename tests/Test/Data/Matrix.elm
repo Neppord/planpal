@@ -1,6 +1,6 @@
 module Test.Data.Matrix exposing (..)
 
-import Data.Matrix exposing (columnCount, columns, fromColumns)
+import Data.Matrix exposing (columnCount, columns, fromColumns, rowCount)
 import Expect
 import Test exposing (Test, describe, test)
 
@@ -20,4 +20,10 @@ suit =
                     |> fromColumns
                     |> columnCount
                     |> Expect.equal 2
+        , test "rowCount" <|
+            \() ->
+                [ [ 1 ], [ 2 ] ]
+                    |> fromColumns
+                    |> rowCount
+                    |> Expect.equal 1
         ]
