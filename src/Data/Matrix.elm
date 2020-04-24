@@ -45,3 +45,13 @@ indexedItems f =
 columns : Matrix a -> List (List a)
 columns =
     identity
+
+
+columnCount : Matrix a -> Int
+columnCount =
+    List.length
+
+
+fromColumns : List (List a) -> Matrix a
+fromColumns =
+    identity

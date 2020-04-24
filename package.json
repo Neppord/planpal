@@ -4,6 +4,7 @@
   "description": "A city builder style game",
   "scripts": {
     "start": "parcel src/index.html --open",
+    "test": "elm-test",
     "build": "rm -r docs/ && parcel build src/index.html --out-dir docs --public-url /planpal/",
     "format": "elm-format --yes src/",
     "elm": "elm"
