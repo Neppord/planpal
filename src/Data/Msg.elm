@@ -8,3 +8,4 @@ type Msg
     | Build Building Int Int
     | PickTool Building
     | ExpandRight
+    | ExpandLeft

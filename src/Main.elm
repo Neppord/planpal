@@ -94,6 +94,16 @@ update msg model =
                 )
                 model
 
+        ExpandLeft ->
+            (UI.map << Timeline.map)
+                (\game ->
+                    game
+                        |> payForExpand
+                        |> Maybe.map (Game.mapLandscape SparseMatrix.growLeft)
+                        |> Maybe.withDefault game
+                )
+                model
+
 
 view : Model -> Html Msg
 view model =

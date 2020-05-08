@@ -89,3 +89,16 @@ growRight m =
             List.repeat size Nothing
     in
     m ++ [ column ]
+
+
+growLeft : SparseMatrix a -> SparseMatrix a
+growLeft m =
+    let
+        size =
+            Matrix.rowCount m
+
+        column : List (Maybe a)
+        column =
+            List.repeat size Nothing
+    in
+    column :: m

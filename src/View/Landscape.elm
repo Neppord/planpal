@@ -102,11 +102,24 @@ buildingToTile n =
 viewTiles : UI Landscape -> Element Msg
 viewTiles ui =
     let
+        landscapeHeight =
+            Matrix.rowCount landscape
+
         expandRight =
             tile grey "Expand"
-                |> List.repeat (Matrix.rowCount landscape)
+                |> List.repeat landscapeHeight
                 |> column
                     [ onClick ExpandRight
+                    , centerY
+                    , alpha 0.5
+                    , spacing 10
+                    ]
+
+        expandLeft =
+            tile grey "Expand"
+                |> List.repeat landscapeHeight
+                |> column
+                    [ onClick ExpandLeft
                     , centerY
                     , alpha 0.5
                     , spacing 10
@@ -126,6 +139,7 @@ viewTiles ui =
                 |> row [ padding 10, spacing 10 ]
                 |> el
                     [ onRight expandRight
+                    , onLeft expandLeft
                     , centerX
                     , centerY
                     ]
