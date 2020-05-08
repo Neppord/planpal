@@ -14,8 +14,8 @@ import Element.Font as Font
 import View.Extras exposing (unSelectable)
 
 
-landscape : UI Landscape -> Element Msg
-landscape ui =
+landscapeView : UI Landscape -> Element Msg
+landscapeView ui =
     [ case UI.selectedTool ui of
         UI.Build building ->
             buildDrawer building
@@ -104,12 +104,21 @@ viewTiles ui =
     let
         expandRight =
             tile grey "Expand"
-                |> el [ onClick ExpandRight, centerY, alpha 0.5 ]
+                |> List.repeat (Matrix.rowCount landscape)
+                |> column
+                    [ onClick ExpandRight
+                    , centerY
+                    , alpha 0.5
+                    , spacing 10
+                    ]
+
+        landscape : Landscape
+        landscape =
+            UI.unwrap ui
     in
     case UI.selectedTool ui of
         UI.Build building ->
-            ui
-                |> UI.unwrap
+            landscape
                 |> SparseMatrix.map buildingToTile
                 |> SparseMatrix.indexedFill (empty building)
                 |> Matrix.columns

@@ -15,7 +15,7 @@ import Element.Border as Border
 import Element.Font as Font
 import Html exposing (Html)
 import Model exposing (Model, init)
-import View.Landscape exposing (landscape)
+import View.Landscape exposing (landscapeView)
 import View.Timeline exposing (timeline)
 
 
@@ -105,7 +105,7 @@ view model =
             , model
                 |> UI.map Timeline.unwrap
                 |> UI.map .landscape
-                |> landscape
+                |> landscapeView
             ]
 
 
